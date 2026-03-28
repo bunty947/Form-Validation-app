@@ -15,7 +15,8 @@ EJS templates to render the user list, display specific user's profile and edit/
 RESTful routes with method-override for PUT/PATCH/DELETE.
 
 How to run
-Install dependenices from npm
+Install dependenices from npm:-->
+
 npm i express
 npm i ejs
 npm i method-override
