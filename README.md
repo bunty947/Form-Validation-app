@@ -26,6 +26,9 @@ How to run
 Install dependenices from npm:-->
 
 npm i express
+
 npm i ejs
+
 npm i method-override
+
 npm i nodemon
