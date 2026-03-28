@@ -1,0 +1,147 @@
+body{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+#form-container{
+    background-color: #f9f9f9;
+    margin: 40px auto;
+    width: 450px;
+    padding: 2rem;
+    border: 1px solid #000;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(54, 0, 0, 0.1);
+  
+   }
+
+.form-group {
+   display: flex;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+
+.form-group > label {
+    width: 40%;
+    text-align: left;
+    margin-right: 0.5rem;
+}
+
+input,select{
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus { 
+    outline: none; 
+    border-color:#4CAF50;
+ }
+
+ .show-error {
+    display: block;
+}
+
+.input-error{
+    flex: 1;
+    display: flex;
+    flex-direction: column;  
+    position: relative;  
+}
+.error-message {
+    color: red;
+    display: none;
+}
+
+small {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+h3{
+ margin-bottom: 10px;   
+ text-align: center;  
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#togglePass{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); 
+    cursor: pointer;
+    color: #888;
+    font-size: 15px;
+    opacity:0.7;
+    transition:0.3s ease;
+}
+
+#togglePass:hover {
+    color: #444;         
+    opacity: 1;
+}
+
+
+.button{
+ display: flex;
+ gap: 10px;
+ margin-left: 40%; 
+ justify-content: flex-start;  
+padding: 20px;
+
+}
+
+button,
+input[type="reset"] {
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;
+}
+
+#rest-butt{
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+#sub-butt {
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #ccc;
+  
+}
+#sub-butt:hover:enabled {
+  background-color: lightgreen;
+  cursor: pointer;
+  border-radius: 10%;
+}
+#sub-butt:disabled{
+    background-color: #ccc;
+    cursor: not-allowed;
+
+}
+#rest-butt:hover{
+    background-color:rgb(203, 37, 37);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.checkbox-group {
+ display: flex;
+ flex-direction: row;
+ white-space: nowrap;
+    gap: 8px;
+}
+.error-message {
+    color:red;
+    font-size: 14px;
+    margin-top: 5px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User profile Page</title>
+</head>
+<body>
+    <body style="font-family:Arial, sans-serif; background:#f9f9f9; padding:30px;">
+
+  <div style="max-width:500px; margin:auto; background:#fff; padding:20px; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+
+    <h2 style="color:brown; text-align:center; margin-bottom:20px;">
+      User: <%= user.user %> Details
+    </h2>
+
+    <p style="margin:10px 0; font-size:16px;">
+      <strong>Email:</strong> <span style="color:#333;"><%= user.email %></span>
+    </p>
+
+    <p style="margin:10px 0; font-size:16px;">
+      <strong>Gender:</strong> <span style="color:#333;"><%= user.Gender %></span>
+    </p>
+
+    <p style="margin:10px 0; font-size:16px;">
+      <strong>Age Confirmation:</strong> <span style="color:#333;"><%= user.ageCheck %></span>
+    </p>
+
+    <p style="margin:10px 0; font-size:16px;">
+      <strong>User ID:</strong> <span style="color:#333;"><%= user.id %></span>
+    </p>
+
+    <div style="text-align:center; margin-top:20px;">
+      <a href="/users" 
+         style="display:inline-block; padding:8px 15px; background:rgb(67, 67, 240); color:#fff; text-decoration:none; border-radius:4px;">
+        Back
+      </a>
+    </div>
+</div>
+</body>
+</html>
