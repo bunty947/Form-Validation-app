@@ -1,7 +1,7 @@
 const express= require("express");
 const app=express();
 const path= require("path");
-const port=8080;
+const port=process.env.PORT || 8080;
 
 const {v4:uuidv4}=require("uuid");
 uuidv4();
@@ -11,7 +11,6 @@ app.use(methodOverride("_method"));
 
 
 const mongoose=require("mongoose");
-const { match } = require("assert");
 mongoose.connect("mongodb://127.0.0.1:27017/userApp")
 .then((res)=>{
     console.log("MongoDB Connection Successfull");
@@ -95,20 +94,6 @@ app.get("/users/:id",async(req,res)=>{
     res.render("profile",{user});
 });
 
-//to modify/update the data
-
-// app.patch("/users/:id",async(req,res)=>{
-//     let { id } = req.params;
-//     let updateData=req.body;
-//     updateData.ageCheck=updateDataageCheck==="on";
-//       await User.findByIdAndUpdate(id,req.body)
-// //   if (user) {
-// //     user.email = req.body.email;
-// //     user.user=req.body.user;        // update email
-// //   }
-//   res.redirect("/users");
-// });
-
 app.patch("/users/:id", async (req,res)=>{
     let { id } = req.params;
 
@@ -126,13 +111,8 @@ app.patch("/users/:id", async (req,res)=>{
 app.delete("/users/:id", async(req, res) => {
   const { id } = req.params;
   await User.findByIdAndDelete(id);
-//   users = users.filter(u => u.id !== id);   
   res.redirect("/users");
 });
-
-
-
-
 
 app.listen(port,()=>{
     console.log(`App is listening to the ${port}`);
