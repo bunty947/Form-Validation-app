@@ -3,31 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <title>Edit Email ID</title>
+    
 </head>
 <body>
-  <form method="post" action="/users/<%= user._id %>?_method=PATCH" 
-        style="background:#f9f9f9; padding:20px; border:1px solid #ccc; width:300px; margin:auto; text-align:center;">
-    
-    <label style="display:block; font-weight:bold; margin-bottom:10px; color:brown;">
-      Update Email:
-    </label>
-    
-    <input type="email" name="email" value="<%= user.email %>" 
-           style="padding:8px; width:90%; margin-bottom:15px; border:1px solid #aaa; border-radius:4px;">
-           <input type="text" name="user"value="<%= user.user %>"style="padding:8px; width:90%; margin-bottom:15px; border:1px solid #aaa; border-radius:4px;">
-    <input name="password" value="<%= user.password %>"style="padding:8px; width:90%; margin-bottom:15px; border:1px solid #aaa; border-radius:4px;">
-<div>
-  <input type="checkbox" name="ageCheck" 
-    <%= user.ageCheck ? "checked" : "" %> >
-  <label>Above 18</label>
+<form action="/users/<%= user._id %>?_method=PATCH" method="POST" style="max-width:400px; margin:auto;">
+  <h3 class="mb-3 text-center">Edit Your Details</h3>
+<div class="mb-3">
+  <input type="text" class="form-control" name="user" value="<%= user.user %>" placeholder="Edit Your Name">
 </div>
 
-    <button type="submit" 
-            style="background:#28a745; color:white; padding:8px 15px; border:none; border-radius:4px; cursor:pointer;">
-      Save Changes
-    </button>
+  <div class="mb-3">
+    <input type="email" class="form-control" name="email" value="<%= user.email %>" placeholder="Edit Your Mailing Address">
+  </div>
 
+  <div class="mb-3">
+    <input type="text" class="form-control" name="password" value="<%= user.password %>" placeholder="Edit Your Password">
+  </div>
+  
+  <div class="mb-3">
+    <label for="gender" class="form-label">Gender</label>
+    <select class="form-select" name="Gender" id="gender">
+      <option value="male" <%= user.Gender === "male" ? "selected" : "" %>>Male</option>
+      <option value="female" <%= user.Gender === "female" ? "selected" : "" %>>Female</option>
+      <option value="others" <%= user.Gender === "others" ? "selected" : "" %>>Others</option>
+    </select>
+  </div>
+<div class="mb-3">
+<button type="submit" class="btn btn-success">
+    Save Changes
+  </button>
+  </div>
   </form>  
 </body>
 </html>

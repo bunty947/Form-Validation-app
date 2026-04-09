@@ -1,29 +1,35 @@
+require("dotenv").config();
+
 const express= require("express");
 const app=express();
 const path= require("path");
-const port=process.env.PORT || 8080;
-
-const {v4:uuidv4}=require("uuid");
-uuidv4();
-
-const methodOverride = require('method-override');
-app.use(methodOverride("_method"));
-
-
 const mongoose=require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/userApp")
+const methodOverride = require('method-override');
+
+const port=process.env.PORT|| 8080;
+
+//middlewares
+
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname,"public")));
+
+//View Engine setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+//DB Connection
+
+mongoose.connect(process.env.MONGO_URL)
 .then((res)=>{
     console.log("MongoDB Connection Successfull");
 })
 .catch((err)=>console.log(err));
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
+// console.log("ENV CHECK:", process.env.MONGO_URL);
 
-app.use(express.static(path.join(__dirname,"public")));
-
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
+//Creating Schema
 
 const userSchema=new mongoose.Schema({
     user:{
@@ -40,6 +46,7 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
         minlength:6,
+        maxLength:9,
     },
     Gender:{
         type:String,
@@ -53,12 +60,16 @@ const userSchema=new mongoose.Schema({
 
 const User= mongoose.model("User",userSchema);
 
-app.get("/users",async(req,res)=>{  //to show the form
+//Express routes for user management
+
+//show all users
+app.get("/users",async(req,res)=>{  
     let users=await User.find();
     res.render("users",{users});
 });
 
-app.post("/register",async(req,res)=>{     //to genrate new user
+ //to create new user
+app.post("/register",async(req,res)=>{    
     console.log(req.body);  
     try{ 
 let {user,email,password,Gender,ageCheck} = req.body;
@@ -73,17 +84,8 @@ res.redirect("/users");
     }
 });
 
-//to show edit form
-app.get("/users/:id/edit",async(req,res)=>{
-    let {id}=req.params;
-    let user= await User.findById(id);
-if(!user){
-        return res.send("Oops! User not found");
-    }
-    res.render("edit",{user});
-});
+// Show user's profile
 
-//to show user's profile
 app.get("/users/:id",async(req,res)=>{
     let{id}=req.params;
     let user=await User.findById(id);
@@ -94,10 +96,20 @@ app.get("/users/:id",async(req,res)=>{
     res.render("profile",{user});
 });
 
+//to show edit form
+app.get("/users/:id/edit",async(req,res)=>{
+    let {id}=req.params;
+    let user= await User.findById(id);
+if(!user){
+        return res.send("Oops! User not found");
+    }
+    res.render("edit",{user});
+});
+
+// edit/update the form
 app.patch("/users/:id", async (req,res)=>{
     let { id } = req.params;
-
-    let updatedData = {
+   let updatedData = {
         ...req.body,
         ageCheck: req.body.ageCheck === "on"
     };
@@ -108,12 +120,15 @@ app.patch("/users/:id", async (req,res)=>{
     res.redirect("/users");
 });
 
+//Delete User
 app.delete("/users/:id", async(req, res) => {
   const { id } = req.params;
   await User.findByIdAndDelete(id);
   res.redirect("/users");
 });
 
+
+//Server
 app.listen(port,()=>{
     console.log(`App is listening to the ${port}`);
 });

@@ -18,7 +18,7 @@ form.addEventListener("submit", function (e) {
 
     let emailValue = inp.value.trim();
     let passValue = pass.value.trim();
-let isValid = true;
+    let isValid = true;
 
     // ---------------- EMAIL VALIDATION ----------------
 
@@ -31,7 +31,7 @@ let isValid = true;
         isValid = false;
     }
     else if (!emailPattern.test(emailValue)) {
-        emailError.textContent = "Please enter a valid email";
+        emailError.textContent = "Please enter a valid email ID";
         emailError.style.display = "block";
         inp.classList.add("error");
         isValid = false;
@@ -46,15 +46,14 @@ let isValid = true;
     let passPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,9}$/;
 
     if (passValue === "") {
-        passError.textContent = "*The password field cannot be blank*";
+        passError.textContent = "*Password field cannot be blank*";
         passError.style.display = "block";
         pass.style.border = "2px solid red";
         isValid = false;
     }
     else if (!passPattern.test(passValue)) {
-        passError.textContent =
-            "Password must be 6-9 characters, contain 1 uppercase and 1 number";
-        passError.style.display = "block";
+       passError.textContent = "Enter a password (6–9 characters) with at least one uppercase letter, one number, and one special character.";
+      passError.style.display = "block";
         pass.style.border = "2px solid red";
         isValid = false;
     }
@@ -162,7 +161,4 @@ ageCheck.addEventListener("change",function(event){
         ageError.style.display="block";
     }
 });
-
-
-
 
